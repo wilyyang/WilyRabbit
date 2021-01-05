@@ -8,62 +8,46 @@ import android.os.AsyncTask;
 
 import androidx.core.app.NotificationCompat;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
 public class Alarm extends BroadcastReceiver {
     String CHANNEL_ID = "Wily Rabbit";
     String CHANNEL_NAME = "Wily Rabbit";
-    String CHANNEL_DESCRIPT = "Wily Rabbit is good habbit";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        TimerAsyncTask task = new TimerAsyncTask(context);
-        task.execute();
+        onPreExecute(context);
+        Flowable.interval(100L, TimeUnit.MILLISECONDS).take(100).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                val -> onProgressUpdate(Math.toIntExact(val)),
+                error -> error.printStackTrace(),
+                ()-> onPostExecute()
+        );
 
     }
 
-    private class TimerAsyncTask extends AsyncTask<Void, Integer, Integer> {
-        private Context mContext;
-        private NotificationManager notificationManager;
-        private NotificationCompat.Builder builder;
-        public TimerAsyncTask(Context context) {
-            super();
-            mContext = context;
-        }
+    private NotificationManager notiManager;
+    private NotificationCompat.Builder builder;
+    private int count;
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-            builder = new NotificationCompat.Builder(mContext, CHANNEL_ID).setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle(CHANNEL_NAME).setContentText("[Timer Start]").setAutoCancel(false)
-                    .setProgress(100,0, false);
+    private void onPreExecute(Context context){
+        notiManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        builder = new NotificationCompat.Builder(context, CHANNEL_ID).setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(CHANNEL_NAME).setContentText("[Timer Start]").setAutoCancel(false)
+                .setProgress(100, 0, false);
+        notiManager.notify(4935, builder.build());
+        count = 0;
+    };
 
-            notificationManager.notify(4935, builder.build());
-        }
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            for(int count = 0; count<100; ++count){
-                publishProgress(count);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            builder.setProgress(100, values[0], false).setContentText("["+values[0]+"]");
-            notificationManager.notify(4935, builder.build());
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            builder.setProgress(0, 0, false).setContentText("[Timer End]");
-            notificationManager.notify(4935, builder.build());
-        }
+    protected void onProgressUpdate(int count) {
+        builder.setProgress(100, count, false).setContentText("["+count+"]");
+        notiManager.notify(4935, builder.build());
     }
+
+    private void onPostExecute(){
+        builder.setProgress(0, 0, false).setContentText("[Timer End]");
+        notiManager.notify(4935, builder.build());
+    };
 }

@@ -20,7 +20,7 @@ public class Alarm extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         onPreExecute(context);
-        Flowable.interval(100L, TimeUnit.MILLISECONDS).take(100).observeOn(AndroidSchedulers.mainThread()).subscribe(
+        Flowable.interval(100L, TimeUnit.MILLISECONDS).take(100).subscribeOn(AndroidSchedulers.mainThread()).subscribe(
                 val -> onProgressUpdate(Math.toIntExact(val)),
                 error -> error.printStackTrace(),
                 ()-> onPostExecute()

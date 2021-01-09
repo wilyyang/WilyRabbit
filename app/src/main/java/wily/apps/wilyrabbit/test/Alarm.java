@@ -1,17 +1,20 @@
-package wily.apps.wilyrabbit;
+package wily.apps.wilyrabbit.test;
 
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import wily.apps.wilyrabbit.R;
+
 
 public class Alarm extends BroadcastReceiver {
     String CHANNEL_ID = "Wily Rabbit";
@@ -25,7 +28,6 @@ public class Alarm extends BroadcastReceiver {
                 error -> error.printStackTrace(),
                 ()-> onPostExecute()
         );
-
     }
 
     private NotificationManager notiManager;

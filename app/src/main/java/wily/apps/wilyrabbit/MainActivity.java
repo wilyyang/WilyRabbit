@@ -1,16 +1,13 @@
 package wily.apps.wilyrabbit;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,18 +28,7 @@ public class MainActivity extends BaseActivity {
         View mainView = getLayoutInflater().inflate(R.layout.activity_main, dynamicContent, false);
         dynamicContent.addView(mainView);
 
-        toolbarTextView = findViewById(R.id.action_bar_title);
-        toolbarInit();
         fragmentInit();
-    }
-
-    private void toolbarInit(){
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
     }
 
     private void fragmentInit(){
@@ -57,22 +43,39 @@ public class MainActivity extends BaseActivity {
                 switch (item.getItemId()) {
                     case R.id.home_tab:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
-                        toolbarTextView.setText(R.string.menu_bottom_home_tab);
+                        toolbarTitle.setText(R.string.title_home);
                         return true;
 
                     case R.id.work_tab:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, workFragment).commit();
-                        toolbarTextView.setText(R.string.menu_bottom_work_tab);
+                        toolbarTitle.setText(R.string.title_work);
                         return true;
 
                     case R.id.objective_tab:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, objectiveFragment).commit();
-                        toolbarTextView.setText(R.string.menu_bottom_objective_tab);
+                        toolbarTitle.setText(R.string.title_objective);
                         return true;
                 }
                 return false;
             }
         });
         bottomNavigation.setSelectedItemId(R.id.home_tab);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.ui_setting_item:
+                Intent intent = new Intent(MainActivity.this, UISettingActivity.class);
+                startActivity(intent);
+        }
+        return true;
     }
 }

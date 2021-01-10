@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
-    protected TextView toolbarTextView;
+    protected TextView toolbarTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,12 +17,12 @@ public class BaseActivity extends AppCompatActivity {
         toolbarInit();
     }
 
-    private void toolbarInit(){
+    protected void toolbarInit(){
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        toolbarTextView = findViewById(R.id.action_bar_title);
+        toolbarTitle = findViewById(R.id.action_bar_title);
     }
 }

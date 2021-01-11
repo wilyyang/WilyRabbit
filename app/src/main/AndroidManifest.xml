@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".RecordActivity"/>
-        <activity android:name=".UISettingActivity"/>
+        <activity android:name=".RecordActivity" />
+        <activity android:name=".UISettingActivity" />
     </application>
 
 </manifest>

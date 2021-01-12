@@ -19,6 +19,19 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".RecordActivity" />
         <activity android:name=".UISettingActivity" />
+
+
+        <receiver android:name=".WidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.js.widgetexample.BUTTON1" />
+                <action android:name="com.js.widgetexample.BUTTON3" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider" />
+        </receiver>
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,6 +29,8 @@ public class MainActivity extends BaseActivity {
         dynamicContent.addView(mainView);
 
         fragmentInit();
+
+        startCheckService();
     }
 
     private void fragmentInit(){
@@ -59,6 +62,12 @@ public class MainActivity extends BaseActivity {
             }
         });
         bottomNavigation.setSelectedItemId(R.id.home_tab);
+    }
+
+    private void startCheckService() {
+        Intent intent = new Intent(MainActivity.this, CheckService.class);
+        intent.setAction(CheckService.ACTION_SERVICE_INIT);
+        startService(intent);
     }
 
     @Override

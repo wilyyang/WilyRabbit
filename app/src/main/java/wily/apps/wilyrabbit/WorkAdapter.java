@@ -9,35 +9,31 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 
-import wily.apps.wilyrabbit.data.Work;
+import java.util.List;
+
+import wily.apps.wilyrabbit.entity.Work;
 
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder> {
-
-
-    private ArrayList<Work> mList;
+    private List<Work> mList;
 
     public class WorkViewHolder extends RecyclerView.ViewHolder {
-        protected TextView id;
-        protected TextView english;
-        protected TextView korean;
+        protected TextView title;
+        protected TextView hour;
+        protected TextView minute;
 
 
         public WorkViewHolder(View view) {
             super(view);
-            this.id = (TextView) view.findViewById(R.id.id_workitem);
-            this.english = (TextView) view.findViewById(R.id.english_listitem);
-            this.korean = (TextView) view.findViewById(R.id.korean_listitem);
+            this.title = (TextView) view.findViewById(R.id.work_title);
+            this.hour = (TextView) view.findViewById(R.id.work_hour);
+            this.minute = (TextView) view.findViewById(R.id.work_minute);
         }
     }
 
-
-    public WorkAdapter(ArrayList<Work> list) {
+    public WorkAdapter(List<Work> list) {
         this.mList = list;
     }
-
-
 
     @Override
     public WorkViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -50,25 +46,20 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
         return viewHolder;
     }
 
-
-
-
     @Override
     public void onBindViewHolder(WorkViewHolder viewholder, int position) {
 
-        viewholder.id.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-        viewholder.english.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-        viewholder.korean.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        viewholder.title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        viewholder.hour.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        viewholder.minute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
 
-        viewholder.id.setGravity(Gravity.CENTER);
-        viewholder.english.setGravity(Gravity.CENTER);
-        viewholder.korean.setGravity(Gravity.CENTER);
+        viewholder.title.setGravity(Gravity.CENTER);
+        viewholder.hour.setGravity(Gravity.CENTER);
+        viewholder.minute.setGravity(Gravity.CENTER);
 
-
-
-        viewholder.id.setText(mList.get(position).getId());
-        viewholder.english.setText(mList.get(position).getEnglish());
-        viewholder.korean.setText(mList.get(position).getKorean());
+        viewholder.title.setText(mList.get(position).getTitle());
+        viewholder.hour.setText(""+mList.get(position).getHour());
+        viewholder.minute.setText(""+mList.get(position).getMinute());
     }
 
     @Override

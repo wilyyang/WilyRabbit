@@ -6,4 +6,6 @@
 
     <color name="colorMenuBackground">#3b4d61</color>
     <color name="itemColor">#f9d10f</color>
+
+    <color name="divder">#888888</color>
 </resources>

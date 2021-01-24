@@ -1,56 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:weightSum="10">
 
     <TextView
-        android:id="@+id/id_workitem"
+        android:id="@+id/work_title"
         android:layout_width="0dp"
-        app:layout_constraintHorizontal_weight="1"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/english_listitem"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        android:padding="5dp"
+        android:layout_weight="4"
         android:textAlignment="center"
-        android:text="123"
+        android:text="init"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/english_listitem"
+        android:id="@+id/work_hour"
         android:layout_width="0dp"
-        app:layout_constraintHorizontal_weight="2"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/id_workitem"
-        app:layout_constraintRight_toLeftOf="@id/korean_listitem"
-        android:padding="5dp"
-        android:layout_margin="10dp"
+        android:layout_weight="2"
         android:textAlignment="center"
-        android:text="english"
+        android:text="0"
         android:textStyle="bold"/>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:text="시"
+        android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/korean_listitem"
+        android:id="@+id/work_minute"
         android:layout_width="0dp"
-        app:layout_constraintHorizontal_weight="2"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/english_listitem"
-        android:padding="5dp"
-        android:layout_margin="10dp"
+        android:layout_weight="2"
         android:textAlignment="center"
-        android:text="phone"
-        android:textStyle="bold" />
+        android:text="0"
+        android:textStyle="bold"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:text="분"
+        android:textStyle="bold"/>
+</LinearLayout>

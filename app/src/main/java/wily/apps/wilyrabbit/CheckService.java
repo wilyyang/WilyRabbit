@@ -3,12 +3,18 @@ package wily.apps.wilyrabbit;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.IBinder;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import wily.apps.wilyrabbit.dao.TodoDao;
+import wily.apps.wilyrabbit.database.TodoDatabase;
+import wily.apps.wilyrabbit.entity.Todo;
 import wily.apps.wilyrabbit.util.NotificationUtil;
 
 public class CheckService extends Service {
@@ -51,9 +57,13 @@ public class CheckService extends Service {
         SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String formatDate = sdfNow.format(date);
 
+        TodoDatabase db = TodoDatabase.getAppDatabase(this);
+
+        db.todoDao().insert(new Todo(formatDate)).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
         notiUtil.sendNotification("Count : "+count+" Time : "+formatDate);
     }
-
 
     // ACTION_SERVICE_INIT
     private void initCheckService(){

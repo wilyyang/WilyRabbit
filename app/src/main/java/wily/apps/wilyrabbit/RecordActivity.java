@@ -7,9 +7,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.lifecycle.Observer;
+
+import java.util.List;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import wily.apps.wilyrabbit.database.TodoDatabase;
+import wily.apps.wilyrabbit.entity.Todo;
 
 public class RecordActivity extends BaseActivity{
+    TextView recordText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +31,17 @@ public class RecordActivity extends BaseActivity{
         toolbarTitle.setText(R.string.title_record);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        recordText = findViewById(R.id.recordText);
+        loadRecords();
+    }
+
+    private void loadRecords(){
+        TodoDatabase db = TodoDatabase.getAppDatabase(this);
+        db.todoDao().getAll().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(item -> {
+                    recordText.setText(item.toString());
+                });
     }
 
     @Override

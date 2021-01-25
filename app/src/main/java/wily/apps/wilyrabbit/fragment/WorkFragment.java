@@ -40,8 +40,6 @@ public class WorkFragment extends Fragment {
 
         loadRecords();
 
-
-
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);

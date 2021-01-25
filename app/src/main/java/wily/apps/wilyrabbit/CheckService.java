@@ -23,6 +23,7 @@ public class CheckService extends Service {
     public static final String ACTION_SERVICE_INIT = "ACTION_SERVICE_INIT";
     public static final String ACTION_SERVICE_STOP = "ACTION_SERVICE_STOP";
     public static final String ACTION_CHECK = "ACTION_CHECK";
+    public static final String ACTION_ALARM = "ACTION_ALARM";
 
     private NotificationUtil notiUtil = null;
     private boolean isInit = false;
@@ -43,10 +44,19 @@ public class CheckService extends Service {
                 case ACTION_CHECK:
                     checkTest();
                     break;
+                case ACTION_ALARM:
+                    alarmTest();
+                    break;
             }
         }
         return START_STICKY;
     }
+
+    // ACTION_ALARM
+    private void alarmTest(){
+        notiUtil.sendNotification("알람입니다");
+    }
+
 
     // ACTION_CHECK
     private int count = 0;

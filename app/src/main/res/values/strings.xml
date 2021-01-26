@@ -7,6 +7,8 @@
     <string name="title_record">기록</string>
     <string name="title_ui_setting">UI 세팅</string>
 
+    <string name="title_register">스케쥴 등록</string>
+
 
     <string name="menu_bottom_home_tab">홈</string>
     <string name="menu_bottom_work_tab">목록</string>

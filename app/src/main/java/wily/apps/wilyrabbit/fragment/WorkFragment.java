@@ -1,5 +1,6 @@
 package wily.apps.wilyrabbit.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +20,10 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import wily.apps.wilyrabbit.MainActivity;
 import wily.apps.wilyrabbit.R;
+import wily.apps.wilyrabbit.RegisterActivity;
+import wily.apps.wilyrabbit.UISettingActivity;
 import wily.apps.wilyrabbit.WorkAdapter;
 import wily.apps.wilyrabbit.database.TodoDatabase;
 import wily.apps.wilyrabbit.database.WorkDatabase;
@@ -31,15 +35,15 @@ public class WorkFragment extends Fragment {
     private WorkAdapter mAdapter;
     RecyclerView mRecyclerView;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_work, container, false);
-        mRecyclerView = view.findViewById(R.id.recyclerview_main_list);
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        loadRecords();
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_work, container, false);
+            mRecyclerView = view.findViewById(R.id.recyclerview_main_list);
+            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+            loadRecords();
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 mLinearLayoutManager.getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
@@ -65,8 +69,11 @@ public class WorkFragment extends Fragment {
     View.OnClickListener workBtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            WorkDialog dialog = new WorkDialog(getContext());
-            dialog.callFunction();
+            Intent intent = new Intent(getContext(), RegisterActivity.class);
+            startActivity(intent);
+
+//            WorkDialog dialog = new WorkDialog(getContext());
+//            dialog.callFunction();
         }
     };
 }

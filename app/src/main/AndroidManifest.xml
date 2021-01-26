@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="wily.apps.wilyrabbit">
 
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,14 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".CheckService"
-            android:enabled="true"
-            android:exported="true"></service>
-        <receiver android:name=".AlarmReceiver"
-            android:exported="false">
-
-        </receiver>
+        <activity android:name=".RegisterActivity"></activity>
 
         <activity android:name=".IntroActivity">
             <intent-filter>
@@ -27,9 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity" />
+
         <activity android:name=".RecordActivity" />
         <activity android:name=".UISettingActivity" />
+        <receiver
+            android:name=".AlarmReceiver"
+            android:exported="false"></receiver>
+        <service
+            android:name=".CheckService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 </manifest>

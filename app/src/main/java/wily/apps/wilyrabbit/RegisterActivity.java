@@ -8,20 +8,36 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 
 public class RegisterActivity extends BaseActivity {
 
+    private FrameLayout frame;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LinearLayout dynamicContent = findViewById(R.id.dynamic_content);
         View registerView = getLayoutInflater().inflate(R.layout.activity_register, dynamicContent, false);
         dynamicContent.addView(registerView);
+        frame = (FrameLayout) findViewById(R.id.frame);
 
         toolbarTitle.setText(R.string.title_register);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        RadioGroup rg = (RadioGroup)findViewById(R.id.scheduleGroup);
+        rg.setOnCheckedChangeListener(radioListener);
     }
+
+    RadioGroup.OnCheckedChangeListener radioListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            frame.removeViewAt(0);
+            switch(checkedId){
+            }
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -18,16 +18,23 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
     private List<Work> mList;
 
     public class WorkViewHolder extends RecyclerView.ViewHolder {
+        protected TextView id;
+        protected TextView type;
         protected TextView title;
-        protected TextView hour;
-        protected TextView minute;
-
+        protected TextView active;
+        protected TextView goal;
+        protected TextView init;
+        protected TextView per;
 
         public WorkViewHolder(View view) {
             super(view);
+            this.id = (TextView) view.findViewById(R.id.work_id);
+            this.type = (TextView) view.findViewById(R.id.work_type);
             this.title = (TextView) view.findViewById(R.id.work_title);
-            this.hour = (TextView) view.findViewById(R.id.work_hour);
-            this.minute = (TextView) view.findViewById(R.id.work_minute);
+            this.active = (TextView) view.findViewById(R.id.work_active);
+            this.goal = (TextView) view.findViewById(R.id.work_goal);
+            this.init = (TextView) view.findViewById(R.id.work_init);
+            this.per = (TextView) view.findViewById(R.id.work_per);
         }
     }
 
@@ -48,18 +55,21 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
 
     @Override
     public void onBindViewHolder(WorkViewHolder viewholder, int position) {
-
-        viewholder.title.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-        viewholder.hour.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-        viewholder.minute.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-
+        viewholder.id.setGravity(Gravity.CENTER);
+        viewholder.type.setGravity(Gravity.CENTER);
         viewholder.title.setGravity(Gravity.CENTER);
-        viewholder.hour.setGravity(Gravity.CENTER);
-        viewholder.minute.setGravity(Gravity.CENTER);
+        viewholder.active.setGravity(Gravity.CENTER);
+        viewholder.goal.setGravity(Gravity.CENTER);
+        viewholder.init.setGravity(Gravity.CENTER);
+        viewholder.per.setGravity(Gravity.CENTER);
 
-        viewholder.title.setText(mList.get(position).getTitle());
-        viewholder.hour.setText(""+mList.get(position).getHour());
-        viewholder.minute.setText(""+mList.get(position).getMinute());
+        viewholder.id.setText(""+mList.get(position).getId());
+        viewholder.type.setText(""+mList.get(position).getType());
+        viewholder.title.setText(""+mList.get(position).getTitle());
+        viewholder.active.setText(""+mList.get(position).isActive());
+        viewholder.goal.setText(""+mList.get(position).getGoalCost());
+        viewholder.init.setText(""+mList.get(position).getInitCost());
+        viewholder.per.setText(""+mList.get(position).getPerCost());
     }
 
     @Override

@@ -39,28 +39,28 @@ public class WorkDialog {
         mBuilder.setPositiveButton("저장", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int hour = alarmPicker.getCurrentHour();
-                int minute = alarmPicker.getCurrentMinute();
-
-                WorkDatabase db = WorkDatabase.getAppDatabase(context);
-                db.workDao().insert(new Work(titleEt.getText().toString(), hour, minute))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe();
-
-                Calendar mCalendar = Calendar.getInstance();
-                mCalendar.set(Calendar.HOUR_OF_DAY, hour);
-                mCalendar.set(Calendar.MINUTE, minute);
-                mCalendar.set(Calendar.SECOND, 0);
-
-                int requestCode = 33;
-                Intent alarmIntent = new Intent(context, AlarmReceiver.class);
-                PendingIntent pAlarmIntent = PendingIntent.getBroadcast(context, AlarmReceiver.NOTIFICATION_ID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                AlarmManager alarmmanager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                alarmmanager.set(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), pAlarmIntent);
-
-                dialog.dismiss();
+//                int hour = alarmPicker.getCurrentHour();
+//                int minute = alarmPicker.getCurrentMinute();
+//
+//                WorkDatabase db = WorkDatabase.getAppDatabase(context);
+//                db.workDao().insert(new Work(titleEt.getText().toString(), hour, minute))
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe();
+//
+//                Calendar mCalendar = Calendar.getInstance();
+//                mCalendar.set(Calendar.HOUR_OF_DAY, hour);
+//                mCalendar.set(Calendar.MINUTE, minute);
+//                mCalendar.set(Calendar.SECOND, 0);
+//
+//                int requestCode = 33;
+//                Intent alarmIntent = new Intent(context, AlarmReceiver.class);
+//                PendingIntent pAlarmIntent = PendingIntent.getBroadcast(context, AlarmReceiver.NOTIFICATION_ID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//                AlarmManager alarmmanager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//                alarmmanager.set(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), pAlarmIntent);
+//
+//                dialog.dismiss();
             }
         });
         mBuilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {

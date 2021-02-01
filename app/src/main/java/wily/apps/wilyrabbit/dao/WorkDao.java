@@ -19,13 +19,13 @@ public interface WorkDao {
     Flowable<List<Work>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable insert(Work todo);
+    Completable insert(Work work);
 
     @Update
-    Completable update(Work todo);
+    Completable update(Work work);
 
     @Delete
-    Completable delete(Work todo);
+    Completable delete(Work work);
 
     @Query("DELETE FROM Work")
     Completable deleteAll();

@@ -16,7 +16,6 @@ public abstract class WorkDatabase extends RoomDatabase {
     private static WorkDatabase INSTANCE = null;
     private static String DB_NAME = "WORK_DB";
 
-    //디비객체생성 가져오기
     public static WorkDatabase getAppDatabase(Context context){
         if(INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context, WorkDatabase.class , "work-db")
@@ -25,7 +24,6 @@ public abstract class WorkDatabase extends RoomDatabase {
         return  INSTANCE;
     }
 
-    //디비객체제거
     public static void destroyInstance() {
         INSTANCE = null;
     }

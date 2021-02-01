@@ -24,11 +24,13 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/et_schedule_title"
                 android:hint="스케쥴 타이틀"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>
             <Switch
+                android:id="@+id/switch_schedule_active"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"/>
@@ -91,11 +93,13 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_cancel"
             android:text="취소"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/btn_save"
             android:text="저장"
             android:layout_width="0dp"
             android:layout_height="match_parent"

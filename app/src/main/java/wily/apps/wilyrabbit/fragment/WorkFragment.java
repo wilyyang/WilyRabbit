@@ -35,7 +35,6 @@ public class WorkFragment extends Fragment {
     private WorkAdapter mAdapter;
     RecyclerView mRecyclerView;
 
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_work, container, false);

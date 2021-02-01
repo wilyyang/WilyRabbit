@@ -9,15 +9,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.lifecycle.Observer;
-
-import java.util.List;
-
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import wily.apps.wilyrabbit.database.TodoDatabase;
-import wily.apps.wilyrabbit.entity.Todo;
 
 public class RecordActivity extends BaseActivity{
     TextView recordText;

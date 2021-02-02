@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import wily.apps.wilyrabbit.database.RecordDatabase;
 import wily.apps.wilyrabbit.database.TodoDatabase;
 
 public class RecordActivity extends BaseActivity{
@@ -30,8 +31,8 @@ public class RecordActivity extends BaseActivity{
     }
 
     private void loadRecords(){
-        TodoDatabase db = TodoDatabase.getAppDatabase(this);
-        db.todoDao().getAll().subscribeOn(Schedulers.io())
+        RecordDatabase db = RecordDatabase.getAppDatabase(this);
+        db.recordDao().getAll().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(item -> {
                     recordText.setText(item.toString());

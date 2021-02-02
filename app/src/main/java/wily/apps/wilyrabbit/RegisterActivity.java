@@ -1,5 +1,6 @@
 package wily.apps.wilyrabbit;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -102,11 +103,18 @@ public class RegisterActivity extends BaseActivity {
             goalCost = checkPickerGoal.getValue();
             initCost = checkPickerInit.getValue();
             perCost = checkPickerPer.getValue();
-
         }else{
             goalCost = timerPickerGoal.getValue();
             initCost = timerPickerInit.getValue();
             perCost = timerPickerPer.getValue();
+        }
+
+        if(active){
+            Intent checkIntent = new Intent(this, CheckService.class);
+            checkIntent.setAction(CheckService.ACTION_REGISTER_CHECK);
+            checkIntent.putExtra("type", type);
+            checkIntent.putExtra("title", title);
+            startService(checkIntent);
         }
 
         db.workDao().insert(new Work(type, title, active, goalCost, initCost, perCost)).subscribeOn(Schedulers.io())
